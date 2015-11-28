@@ -79,9 +79,11 @@ void	ft_mlx(t_env *e)
 	e->endian = 1;
 	e->s_line = WIDTH;
 	e->data = mlx_get_data_addr(e->img, &(e->bpp), &(e->s_line), &(e->endian));
-	e->color = mlx_get_color_value(e->mlx, 0x3498db);
-	e->color2 = mlx_get_color_value(e->mlx, 0x00561b);
+	e->color = 0x3498db;
+	e->color2 = 0x00561b;
 	mlx_key_hook(e->win, key_hook, e);
 	mlx_expose_hook(e->win, expose_hook, e);
+	free(e->inc);
+	free(e->box);
 	mlx_loop(e->mlx);
 }

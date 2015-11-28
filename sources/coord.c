@@ -26,7 +26,10 @@ void		ft_get_tab(t_map *map)
 		exit(0);
 	}
 	while (get_next_line(fd, &line))
+	{	
 		map->y++;
+		free(line);
+	}
 	close(fd);
 	fd = open(map->av[1], O_RDONLY);
 	if ((map->tab = (char **)malloc(sizeof(char *) * (map->y + 1))) == NULL)
@@ -39,6 +42,7 @@ void		ft_get_tab(t_map *map)
 			map->y--;
 	}
 	close(fd);
+	free(line);
 }
 
 t_coord		*ft_new_coord(int x, int y, int z, t_map *map)
@@ -46,7 +50,7 @@ t_coord		*ft_new_coord(int x, int y, int z, t_map *map)
 	t_coord *coord;
 
 	if ((coord = (t_coord *)malloc(sizeof(t_coord))) == NULL)
-		return (NULL);
+		exit(0);
 	coord->size_x = (map->x);
 	coord->size_y = (map->y);
 	coord->z = z;
@@ -64,8 +68,8 @@ void		getch(int i, int j, t_map *map, t_coord ***coord)
 			coord[i][j] = ft_new_coord(j, i, ft_atoi(map->tmp[j]), map);
 			coord[i][j]->size_y = (map->y);
 		}
+		free(map->tmp[j]);
 	}
-	free(map->tmp);
 }
 
 t_coord		***ft_get_coord(t_map *map)
@@ -77,20 +81,23 @@ t_coord		***ft_get_coord(t_map *map)
 	i = 0;
 	ft_get_tab(map);
 	if ((coord = (t_coord ***)malloc(sizeof(t_coord **) * map->y + 1)) == NULL)
-		return (NULL);
+		exit(0);
 	while (i < map->y)
 	{
 		map->tmp = ft_strsplit(map->tab[i], ' ');
+		free(map->tab[i]);
 		map->x = 0;
 		while (map->tmp[map->x] != '\0')
 			map->x++;
+		free(map->tmp[map->x]);
 		j = -1;
-		if ((coord[i] = (t_coord **)malloc(sizeof(t_coord*) *
-(map->x + 1))) == NULL)
-			return (NULL);
+		if ((coord[i] = (t_coord **)malloc(sizeof(t_coord*) * (map->x + 1))) == NULL)
+			exit(0);
 		getch(i, j, map, coord);
 		i++;
+		free(map->tmp);
 	}
-	map->tmp = NULL;
+	free(map->tab);
+	free(map);
 	return (coord);
 }

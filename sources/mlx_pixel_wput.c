@@ -48,4 +48,5 @@ void				mlx_pixel_wput(t_env *e, int x, int y)
 	e->colorpix->b2 = (e->color2 & 0xFF);
 	if (x > 0 && x < 1920)
 		mlx_pxl_wputb(e, x, y, place);
+	free(e->colorpix);
 }

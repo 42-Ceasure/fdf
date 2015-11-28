@@ -98,8 +98,8 @@ typedef struct		s_env
 	void			*mlx;
 	void			*win;
 	void			*img;
-	unsigned long	color;
-	unsigned long	color2;
+	unsigned int	color;
+	unsigned int	color2;
 	t_coord			***coord;
 	t_inc			*inc;
 	t_color			*colorpix;

@@ -80,4 +80,6 @@ void	draw(t_env *e)
 		i++;
 	}
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	free(e->inc);
+	free(e->box);
 }
