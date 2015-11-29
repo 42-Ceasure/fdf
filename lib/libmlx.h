@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "minilibx_macos/mlx.h"
-# include "libft/libft.h"
+# include "libft/inc/libft.h"
 # define WIDTH 1920
 # define HEIGHT 1080
 # define XCENTER 960
