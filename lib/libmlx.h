@@ -13,17 +13,17 @@
 #ifndef LIBMLX_H
 # define LIBMLX_H
 
-# include <mlx.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include "minilibx_macos/mlx.h"
 # include "libft/libft.h"
-# define WIDTH 1920
-# define HEIGHT 1080
-# define XCENTER 960
-# define YCENTER 540
+# define WIDTH 800
+# define HEIGHT 600
+# define XCENTER 400
+# define YCENTER 300
 # define INC e->zoom
 # define OFF 1.00 * e->off
 # define YOFF 1.00 * e->off2
@@ -151,6 +151,6 @@ int					calc_dist_ab(float x, float y, float x2, float y2);
 int					key_hook(int keycode, t_env *c);
 int					mouse_hook(int button, int x, int y, t_env *c);
 int					expose_base(t_env *c);
-t_coord				***ft_get_coord(t_map *map);
+t_coord				***ft_get_coord(t_map *map, char *av);
 
 #endif

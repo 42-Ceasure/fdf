@@ -32,21 +32,21 @@ int		expose_hook(t_env *e)
 void	key_hook2(int keycode, t_env *e)
 {
 	if (keycode == 123)
-		e->off -= 10;
+		e->off -= 20;
 	if (keycode == 124)
-		e->off += 10;
+		e->off += 20;
 	if (keycode == 126)
-		e->off2 -= 10;
+		e->off2 -= 20;
 	if (keycode == 125)
-		e->off2 += 10;
+		e->off2 += 20;
 	if (keycode == 27)
-		e->zoom -= 1;
+		e->zoom -= 5;
 	if (keycode == 24)
-		e->zoom += 1;
+		e->zoom += 5;
 	if (keycode == 47)
-		e->zh += 2;
+		e->zh += 5;
 	if (keycode == 43)
-		e->zh -= 2;
+		e->zh -= 5;
 }
 
 int		key_hook(int keycode, t_env *e)
@@ -55,13 +55,13 @@ int		key_hook(int keycode, t_env *e)
 		exit(0);
 	key_hook2(keycode, e);
 	if (keycode == 0)
-		e->rot += (2 * M_PI / 360);
+		e->rot += (2 * M_PI / 180);
 	if (keycode == 2)
-		e->rot -= (2 * M_PI / 360);
+		e->rot -= (2 * M_PI / 180);
 	if (keycode == 1)
-		e->roty += (2 * M_PI / 180);
+		e->roty += (2 * M_PI / 90);
 	if (keycode == 13)
-		e->roty -= (2 * M_PI / 180);
+		e->roty -= (2 * M_PI / 90);
 	mlx_destroy_image(e->mlx, e->img);
 	e->img = mlx_new_image(e->mlx, WIDTH, HEIGHT);
 	e->data = mlx_get_data_addr(e->img, &(e->bpp), &(e->s_line),

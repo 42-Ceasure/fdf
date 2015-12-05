@@ -14,9 +14,9 @@
 
 void				mlx_pxl_wputb(t_env *e, int x, int y, unsigned int place)
 {
-	place = y * (1920 * 4);
+	place = y * ((WIDTH) * 4);
 	place += x * 4;
-	if (place < ((1920 * 1080) * (sizeof(char) * 4)))
+	if (place < (((WIDTH) * (HEIGHT)) * (sizeof(char) * 4)))
 	{
 		if (e->inc->z <= 0 && e->inc->z2 <= 0 && e->inc->z3 <= 0)
 		{
@@ -38,7 +38,7 @@ void				mlx_pixel_wput(t_env *e, int x, int y)
 	unsigned int	place;
 
 	e->colorpix = malloc(sizeof(t_color));
-	place = y * (1920 * 4);
+	place = y * ((WIDTH) * 4);
 	place += x * 4;
 	e->colorpix->r = (e->color & 0xFF0000) >> 16;
 	e->colorpix->g = (e->color & 0xFF00) >> 8;
@@ -46,6 +46,6 @@ void				mlx_pixel_wput(t_env *e, int x, int y)
 	e->colorpix->r2 = (e->color2 & 0xFF0000) >> 16;
 	e->colorpix->g2 = (e->color2 & 0xFF00) >> 8;
 	e->colorpix->b2 = (e->color2 & 0xFF);
-	if (x > 0 && x < 1920)
+	if (x > 0 && x < (WIDTH))
 		mlx_pxl_wputb(e, x, y, place);
 }

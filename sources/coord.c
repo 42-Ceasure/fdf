@@ -12,7 +12,7 @@
 
 #include "../lib/libmlx.h"
 
-void		ft_get_tab(t_map *map)
+void		ft_get_tab(t_map *map, char *string)
 {
 	int		fd;
 	int		i;
@@ -20,7 +20,7 @@ void		ft_get_tab(t_map *map)
 
 	map->y = 0;
 	i = 0;
-	if ((fd = open(map->av[1], O_RDONLY)) < 0)
+	if ((fd = open(string, O_RDONLY)) < 0)
 	{
 		ft_putendl("Cannot open Map");
 		exit(0);
@@ -28,7 +28,7 @@ void		ft_get_tab(t_map *map)
 	while (get_next_line(fd, &line))
 		map->y++;
 	close(fd);
-	fd = open(map->av[1], O_RDONLY);
+	fd = open(string, O_RDONLY);
 	if ((map->tab = (char **)malloc(sizeof(char *) * (map->y + 1))) == NULL)
 		exit (0);
 	while (get_next_line(fd, &line))
@@ -68,14 +68,14 @@ void		getch(int i, int j, t_map *map, t_coord ***coord)
 	free(map->tmp);
 }
 
-t_coord		***ft_get_coord(t_map *map)
+t_coord		***ft_get_coord(t_map *map, char *av)
 {
 	int		i;
 	int		j;
 	t_coord	***coord;
 
 	i = 0;
-	ft_get_tab(map);
+	ft_get_tab(map, av);
 	if ((coord = (t_coord ***)malloc(sizeof(t_coord **) * map->y + 1)) == NULL)
 		return (NULL);
 	while (i < map->y)
